@@ -105,7 +105,10 @@ defmodule SilviAsAService.Menu do
       get do
         {:ok, %{status_code: 200, body: body} } = HTTPoison.get("http://www.silvis-kantine.de")
         res = SilviAsAService.parse(body |> IO.iodata_to_binary)
-        conn |> json(res)
+        conn
+        |> Plug.Conn.put_resp_content_type("application/json")
+        |> Plug.Conn.send_resp(conn.status || 200, Poison.encode_to_iodata!(res, pretty: true))
+        |> Plug.Conn.halt
       end
     end
   end

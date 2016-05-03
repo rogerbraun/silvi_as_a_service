@@ -104,7 +104,7 @@ defmodule SilviAsAService.Menu do
       desc "Returns the current menu."
       get do
         {:ok, %{status_code: 200, body: body} } = HTTPoison.get("http://www.silvis-kantine.de")
-        res = SilviAsAService.parse(body)
+        res = SilviAsAService.parse(body |> IO.iodata_to_binary)
         conn |> json(res)
       end
     end

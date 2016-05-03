@@ -14,7 +14,7 @@ defmodule SilviAsAService.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :maru, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -30,7 +30,8 @@ defmodule SilviAsAService.Mixfile do
     [
       {:mix_test_watch, "~> 0.2", only: :dev},
       {:floki, "~> 0.8"},
-      {:sweet_xml, "~> 0.6.1"}
+      {:maru, "~> 0.9"},
+      {:httpoison, "~> 0.8.0"}
     ]
   end
 end

@@ -95,3 +95,18 @@ defmodule SilviAsAService do
     )
   end
 end
+
+defmodule SilviAsAService.Menu do
+  use Maru.Router
+
+  namespace :menu do
+    namespace :current do
+      desc "Returns the current menu."
+      get do
+        {:ok, %{status_code: 200, body: body} } = HTTPoison.get("http://www.silvis-kantine.de")
+        res = SilviAsAService.parse(body)
+        conn |> json(res)
+      end
+    end
+  end
+end
